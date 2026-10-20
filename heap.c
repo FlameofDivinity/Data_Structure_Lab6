@@ -10,7 +10,9 @@ static void sink(Heap *p, int);
 */
 int less(const Msg *a, const Msg *b)
 {
-        // Энд жиших үйлдийг хийнэ
+  if(b->priority > a->priority)
+      return 1;
+  return 0;
 }
 
 /*
@@ -20,7 +22,14 @@ int less(const Msg *a, const Msg *b)
  */
 void insert(Heap *p, const Msg x)
 {
-        // Энд оруулах үйлдлийг хийнэ
+  p->h_arr[p->h_len] = x;
+  while (k > 0 && less(&p->h_arr[(k-1)/2], &p->h_arr[k]){
+    Msg temp = p->h_arr[k];
+    p->h_arr[k] = p->h_arr[(k-1)/2];
+    p->h_arr[(k-1)/2} = tmp;
+    k = (k-1)/2;
+  }
+  p->h_len++;
 }
 
 /*
@@ -29,7 +38,11 @@ void insert(Heap *p, const Msg x)
  */
 static void swim(Heap *p, int k)
 {
-        // Энд swim үйлдлийг хийнэ
+    while (k > 0 && less(&p->h_arr[(k-1)/2], &p->h_arr[k]){
+    Msg temp = p->h_arr[k];
+    p->h_arr[k] = p->h_arr[(k-1)/2];
+    p->h_arr[(k-1)/2} = tmp;
+    k = (k-1)/2;
 }
 
 /*
@@ -38,7 +51,17 @@ static void swim(Heap *p, int k)
  */
 static void sink(Heap *p, int k)
 {
-        // Энд sink үйлдлийг хийнэ
+  while (2*k + 1 <= p->h_len){
+    int j = 2*(k+1);
+    if( j + 1 < p->h_len && less(&p->h_arr[j], &p->h_arr[j+1]))
+      j++;
+    if(!less(&p->h_arr[k],&p->h_arr[j]))
+      break;
+    Msg tmp = p->h_arr[k];
+    p->h_arr[k] = p->h_arr[j];
+    p->h_arr[j] = tmp;
+    k = j;
+  }
 }
 
 /*
@@ -47,6 +70,7 @@ static void sink(Heap *p, int k)
  */
 Msg delMin(Heap *p)
 {
-        // Энд хамгийн багыг гаргах үйлдлийг хийнэ
+  Msg min = p->h_arr[1];
+  
 }
 
